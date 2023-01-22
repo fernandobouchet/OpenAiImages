@@ -10,12 +10,16 @@ import {
   RadioGroup,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setData, clearData } from '../features/imageData/imageDataSlice';
 
 const ImageForm = () => {
   const [imageData, setImageData] = useState({
     prompt: '',
     size: 'medium',
   });
+
+  const dispatch = useDispatch();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement> | string) => {
     if (typeof e !== 'string') {
@@ -33,7 +37,7 @@ const ImageForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(imageData);
+    dispatch(setData(imageData));
   };
 
   return (
