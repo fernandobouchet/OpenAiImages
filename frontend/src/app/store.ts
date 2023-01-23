@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import imageDataReducer from './features/imageData/imageDataSlice';
+import imageDataReducer from '../features/imageData/imageDataSlice';
 
 export const store = configureStore({
   reducer: { imageData: imageDataReducer },
