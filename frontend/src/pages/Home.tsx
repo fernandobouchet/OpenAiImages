@@ -4,9 +4,8 @@ import ImageForm from '../components/ImageForm';
 
 const Home = () => {
   return (
-    <Container>
-      <h1>OpenAI images</h1>
-      <Box>
+    <Container maxW="lg" height={'100vh'}>
+      <Box height={'full'} py="10">
         <ImageForm />
         <ImageCard />
       </Box>
