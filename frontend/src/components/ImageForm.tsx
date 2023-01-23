@@ -11,7 +11,8 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setData, clearData } from '../features/imageData/imageDataSlice';
+import { AppDispatch } from '../app/store';
+import { generateImage } from '../features/imageData/imageDataSlice';
 
 const ImageForm = () => {
   const [imageData, setImageData] = useState({
@@ -19,7 +20,7 @@ const ImageForm = () => {
     size: 'medium',
   });
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement> | string) => {
     if (typeof e !== 'string') {
@@ -37,7 +38,7 @@ const ImageForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setData(imageData));
+    dispatch(generateImage(imageData));
   };
 
   return (

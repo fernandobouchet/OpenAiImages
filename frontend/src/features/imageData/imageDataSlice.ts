@@ -1,34 +1,71 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import imageDataService from './imageDataService';
 
 export interface imageDataSliceState {
-  prompt: string;
-  size: string;
+  data: string;
+  isError: boolean;
+  isSuccess: boolean;
+  isLoading: boolean;
+  message: string;
 }
 
 const initialState: imageDataSliceState = {
-  prompt: '',
-  size: '',
+  data: '',
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message: '',
 };
+
+export const generateImage = createAsyncThunk(
+  'api/generateImage',
+  async (imageData: { prompt: string; size: string }, thunkAPI) => {
+    try {
+      return await imageDataService.generateImage(imageData);
+    } catch (error: any) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const imageDataSlice = createSlice({
   name: 'imageData',
   initialState,
   reducers: {
-    setData: (state, action: PayloadAction<imageDataSliceState>) => {
-      return {
-        ...state,
-        prompt: action.payload.prompt,
-        size: action.payload.size,
-      };
+    reset: (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = '';
     },
-    clearData: (state) => {
-      state = initialState;
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(generateImage.pending, (state) => {
+        state.isLoading = true;
+        state.message = 'Loading';
+      })
+      .addCase(generateImage.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload.status;
+        state.data = action.payload.data;
+      })
+      .addCase(generateImage.rejected, (state, action: any) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setData, clearData } = imageDataSlice.actions;
+export const { reset } = imageDataSlice.actions;
 
 export default imageDataSlice.reducer;
