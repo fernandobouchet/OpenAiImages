@@ -33,9 +33,7 @@ const generateImage = async (req: Request, res: Response) => {
     } else {
       console.log(error.message);
     }
-    res.status(400).send({
-      error: error,
-    });
+    res.status(400).send(error.response.data || error.message);
   }
 };
 
