@@ -1,11 +1,13 @@
 import { Box, Container } from '@chakra-ui/react';
+import Header from '../components/Header';
 import ImageCard from '../components/ImageCard';
 import ImageForm from '../components/ImageForm';
 
 const Home = () => {
   return (
-    <Container maxW="lg" height={'100vh'}>
-      <Box height={'full'} py="10">
+    <Container maxW="xl" h={'100vh'}>
+      <Header />
+      <Box>
         <ImageForm />
         <ImageCard />
       </Box>
