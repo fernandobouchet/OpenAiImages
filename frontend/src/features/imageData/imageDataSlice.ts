@@ -26,7 +26,8 @@ export const generateImage = createAsyncThunk(
       const message =
         (error.response &&
           error.response.data &&
-          error.response.data.message) ||
+          error.response.data.error &&
+          error.response.data.error.message) ||
         error.message ||
         error.toString();
       return thunkAPI.rejectWithValue(message);
