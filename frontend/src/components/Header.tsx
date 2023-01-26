@@ -12,8 +12,12 @@ const Header = () => {
           Image Generator
         </Heading>
         <Text fontSize="sm" pt={3}>
-          Example of how with the AI system model DALL-E from OpenAI allows for
-          easy generation of custom images based on text prompts.
+          Example of how with{' '}
+          <a href="https://openai.com/api/" target={'_blank'}>
+            OpenAI
+          </a>{' '}
+          DALL-E AI system model you can easily generate custom images based on
+          text prompts.
         </Text>
       </Box>
     </Container>

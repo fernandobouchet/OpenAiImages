@@ -6,7 +6,7 @@ const ImageCard = () => {
   const state = useSelector((state: RootState) => state.imageData);
 
   return (
-    <Center>
+    <Center my={14}>
       {!state.isSuccess ? (
         <Box boxSize={'md'}></Box>
       ) : (

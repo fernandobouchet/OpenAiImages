@@ -5,7 +5,7 @@ import ImageForm from '../components/ImageForm';
 
 const Home = () => {
   return (
-    <Container maxW="xl" h={'100vh'}>
+    <Container maxW="xl" minH={'100vh'}>
       <Header />
       <Box>
         <ImageForm />
