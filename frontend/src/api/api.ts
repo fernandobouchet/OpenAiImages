@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const API = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://openai-images-7fyq.onrender.com/api',
 });
